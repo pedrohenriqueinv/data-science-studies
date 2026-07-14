@@ -1,48 +1,32 @@
-/* sort_int.c – quick‑sort implementation for an integer array */
+# 🧠 Data Science & Cloud Engineering Study Repository
 
-  #include <stddef.h>
+Welcome! This repository is dedicated exclusively to storing my academic notes, theoretical summaries, and study guides in Data Science, Data Engineering, and Cloud Computing. 
 
-  /**  - Sorts an array of integers in ascending order using the quicksort algorithm.
-  - @param arr  Pointer to the first element of the array.  - @param n    Number of elements in the array.
-   */
-  void sort_int_array(int *arr, size_t n) {
-   if (arr == NULL || n < 2) {
-   return;
-   }
+> 📌 **Note:** This is a theoretical and conceptual study log. For hands-on projects, deployments, and code portfolios, please visit my personal portfolio repository.
 
-  -  /* Helper to swap two integers */
-   static void swap(int *a, int *b) {
-   int tmp = *a;
-   *a = *b;
-   *b = tmp;
-   }
+---
 
-  -  /* Recursive quicksort working on pointers */
-   static void quicksort(int *low, int *high) {
-   if (low >= high) {
-       return;
-   }
-   int *pivot = low;
-   int *left  = low + 1;
-   int *right = high;
+## 🗺️ Roadmap & Study Topics
 
-   while (left <= right) {
-       while (left <= right && *left <= *pivot) {
-           ++left;
-       }
-       while (left <= right && *right >= *pivot) {
-           --right;
-       }
-       if (left < right) {
-           swap(left, right);
-           ++left;
-           --right;
-       }
-   }
-   swap(pivot, right);
-   quicksort(low, right - 1);
-   quicksort(right + 1, high);
-   }
+Below is the list of topics documented in this repository:
 
-  -  quicksort(arr, arr + n - 1);
-  }
+### ☁️ [Cloud Computing](./cloud-computing/understanding-cloud.md)
+*   **Concepts:** Virtualization, Scalability (Horizontal vs. Vertical), and Billing Models (Pay-as-you-go).
+*   **Service & Deployment Models:** IaaS, PaaS, SaaS, FaaS, Hybrid, and Multicloud.
+*   **Providers & Equivalencies:** Core services and case studies from AWS, Azure, and Google Cloud.
+*   **Data Regulations:** GDPR, PII, and geographical compliance.
+
+### 🐍 Python for Data Science *(Coming Soon)*
+*   Basic syntax, data structures, and analysis libraries (Pandas, NumPy).
+
+---
+
+## 🛠️ How to Use This Repository
+
+If you want to use my notes to study:
+1. Navigate to the specific directory of interest (e.g., `/cloud-computing`).
+2. Read the `.md` (Markdown) files containing organized summaries.
+3. (Optional) Import any `.txt` or `.apkg` files inside the `anki-flashcards` directory into your **Anki** to practice active recall.
+
+## 📄 License
+This repository is licensed under the MIT License. Feel free to use the notes for your own learning!
