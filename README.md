@@ -29,4 +29,6 @@ If you want to use my notes to study:
 3. (Optional) Import any `.txt` or `.apkg` files inside the `anki-flashcards` directory into your **Anki** to practice active recall.
 
 ## 📄 License
+<<<<<<< HEAD
 This repository is licensed under the MIT License. Feel free to use the notes for your own learning!
+=======
