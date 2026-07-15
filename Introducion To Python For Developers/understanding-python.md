@@ -237,3 +237,275 @@ print(coordinates[1])  # Output: 20
 | **Set** | `{}` | **No** | Add/Remove only | **No** |
 | **Tuple** | `()` | Yes | **No** | Yes |
 
+
+# Python Cheat Sheet: Conditionals, Loops, and Workflows
+*Introduction to Python for Developers*
+
+---
+
+## 🔀 Conditionals & Operators (How Code Makes Decisions)
+
+In Python, we use **comparison operators** to ask questions and **conditional structures** to decide what the code should do based on the answers (which always return `True` or `False`).
+
+### ⚖️ 1. Comparison Operators (For Asking Questions)
+
+*   `==` (**Equal to**): Checks if two values are equal.
+    *   *Example:* `2 == 3` returns `False`. 
+    *   *Note:* We use a double equals sign `==` for comparison, as a single equals sign `=` is reserved for assigning variables.
+*   `!=` (**Not equal to**): Checks if two values are different.
+    *   *Example:* `2 != 3` returns `True`.
+*   `>` and `<`: **Greater than** / **Less than**.
+    *   *Example:* `5 > 3` returns `True`.
+*   `>=` and `<=`: **Greater than or equal to** / **Less than or equal to**.
+
+> 🔤 **Golden Tip:** You can also compare strings (text)! Python compares them lexicographically (by alphabetical order).
+> *Example:* `"James" > "Brian"` returns `True` because the letter "J" comes after the letter "B" in the alphabet.
+
+---
+
+### ⚙️ 2. Conditional Structures (`if`, `elif`, `else`)
+
+These structures control the execution path of your program.
+
+*   `if` (**If**): The starting point. If the condition is true, Python executes the indented block of code inside it.
+*   `elif` (**Else if**): Used to test a new condition, but only if the previous `if` (or `elif`) evaluated to false. You can use as many `elif` statements as you need.
+*   `else` (**Else**): The fallback case. If none of the preceding conditions are true, the code block under `else` will run.
+
+#### 🍝 Practical Example:
+
+pasta = 200
+
+if pasta >= 300:
+    print("Perfect! We have enough pasta for the recipe.")
+elif pasta >= 150:
+    print("Not enough for the full recipe, but we can make a smaller portion.")
+else:
+    print("Error: Insufficient ingredients! Go to the grocery store.")
+
+
+
+#### ⚠️ The Two Sacred Rules of Conditionals:
+
+1. **The Colon (`:`):** Every `if`, `elif`, or `else` line must end with a `:` at the end. This signals to Python that an action block is starting.
+2. **Indentation (Code Alignment):** The code that runs inside a conditional block must be indented to the right (using one `Tab` or 4 spaces). If you align everything to the left, Python will throw an `IndentationError` and won't run!
+
+---
+
+## 🔁 For Loops (Automating Repetitive Tasks)
+
+`for` loops are used to iterate over a collection (like a list, a dictionary, or even characters in a string) and automatically perform an action for each item.
+
+### 🧩 1. Basic Structure
+
+A `for` loop requires two things: an **iterable** (the collection of data to loop through) and an **iterator** (a temporary variable representing the current item in the loop).
+
+
+ingredients = ["tomato", "pasta", "basil"]
+
+# "ingredient" is the iterator (current item)
+# "ingredients" is the iterable (entire list)
+for ingredient in ingredients:
+    print(ingredient)
+
+
+
+> **Rule of Thumb:** Just like conditionals, the `for` statement must end with a colon (`:`), and the nested action must be indented.
+
+---
+
+### 🔀 2. Loops with Conditionals (`if` inside a `for`)
+
+You can nest decision-making structures inside a loop to analyze items individually.
+
+
+quantities = [600, 300, 50]
+
+for qty in quantities:
+    if qty > 500:
+        print("Too many ingredients!")
+    elif qty >= 100:
+        print("Normal amount.")
+    else:
+        print("Too few ingredients!")
+
+
+
+---
+
+### 📖 3. Iterating Through Dictionaries (`.items()`, `.keys()`, and `.values()`)
+
+To loop through dictionaries (which store key-value pairs), use these specific methods:
+
+* `.items()`: Returns both the key and the value. Requires two temporary variables.
+
+recipe = {"tomato": 500, "pasta": 300}
+
+# "item" becomes the key, "qty" becomes the value
+for item, qty in recipe.items():
+    print(f"{item}: {qty} grams")
+
+
+
+
+* `.keys()`: Iterates only through keys (e.g., `"tomato"`, `"pasta"`).
+* `.values()`: Iterates only through values (e.g., `500`, `300`).
+
+---
+
+### 🔢 4. The `range()` Function (Repeating a Set Number of Times)
+
+When you want to run a block of code a specific number of times, or generate a sequence of numbers, use `range(start, exclusive_end)`.
+
+> **Important:** The stop value in `range()` is never included in the sequence.
+
+
+# This will print numbers from 1 to 5 (6 is excluded)
+for i in range(1, 6):
+    print(i)
+
+
+---
+
+## 🔄 While Loops (Repeating Until a Condition Changes)
+
+Unlike `for` loops (which iterate over a collection from start to finish), a `while` loop checks a condition first. If the condition is `True`, it runs the block and returns to the top to check the condition again, repeating this cycle until the condition evaluates to `False`.
+
+### 🧩 1. Basic Structure
+
+
+ingredients_left = 3
+
+# While the value is greater than zero, the loop keeps running
+while ingredients_left > 0:
+    print(f"{ingredients_left} ingredients remaining...")
+    # Decrement by 1 each round so the loop doesn't run forever!
+    ingredients_left -= 1
+
+print("Shopping list complete!")
+
+
+
+---
+
+### ⚠️ 2. Danger: The Infinite Loop!
+
+If you forget to update the variable being tested in the condition (like neglecting `ingredients_left -= 1`), the condition remains `True` forever. The program will run endlessly and freeze your system.
+
+* **How to stop an infinite loop in your terminal?**
+* Press **`Ctrl + C`** (Windows) or **`Cmd + C`** (Mac).
+
+
+
+---
+
+### 🛑 3. The `break` Statement (Forced Termination)
+
+You can force a loop (`while` or `for`) to stop immediately using the `break` keyword, even if the loop's main condition is still `True`.
+
+counter = 0
+
+while True: # This would normally be an infinite loop...
+    print(counter)
+    counter += 1
+    if counter == 5:
+        break # ...but break forces the exit when counter reaches 5!
+
+
+
+---
+
+### 🔀 4. Conditionals Within `while` Loops
+
+You can include `if`, `elif`, and `else` blocks inside your `while` loops to provide status updates to users as progress changes.
+
+
+items_left = 5
+
+while items_left > 0:
+    if items_left > 3:
+        print("Still several ingredients remaining.")
+    elif items_left >= 1:
+        print("Almost there! Only a few left.")
+    
+    items_left -= 1
+
+
+
+---
+
+## 🛠️ Tools for Complex Workflows
+
+To design smarter code logic, you can combine loops with keywords that test for element existence or validate multiple conditions simultaneously.
+
+### 🔍 1. Membership Operators (`in` and `not in`)
+
+These operators check whether an item exists (or does not exist) within a collection (like a list or dictionary keys) without needing to loop through every item manually.
+
+* `in`: Returns `True` if the item is present.
+
+# Checking if "pasta" is a key in the recipe dictionary
+if "pasta" in recipe:
+    print("We have pasta in the recipe!")
+
+
+
+
+* `not in`: Returns `True` if the item is **not** present (ideal for identifying missing items).
+
+if "salt" not in pantry_stock:
+    print("No salt in the pantry! Add it to the shopping list.")
+
+
+
+
+
+---
+
+### 🚦 2. Logical Operators (`and` and `or`)
+
+These allow you to evaluate multiple conditions in a single line.
+
+* `and`: Returns `True` only if **all** conditions are true at the same time.
+
+# Needs to have enough pasta AND enough olive oil
+if pantry_stock["pasta"] >= 500 and pantry_stock["olive oil"] >= 30:
+    print("Ready to start cooking!")
+
+
+
+
+* `or`: Returns `True` if **at least one** of the conditions is true.
+
+# Having at least one of these helps
+if pantry_stock["pasta"] >= 500 or pantry_stock["olive oil"] >= 30:
+    print("We have at least one key ingredient ready.")
+
+
+
+
+
+---
+
+### 📥 3. Building Dynamic Lists (`.append()`)
+
+A common development pattern is to initialize an empty list and populate it with items as they satisfy conditions inside a loop.
+
+* `.append()`: Adds an item to the end of a list.
+
+
+shopping_list = [] # Starts empty
+
+for ingredient, qty in recipe.items():
+    # If the recipe requires more than what we have in our pantry...
+    if qty > pantry_stock[ingredient]:
+        # ...append the missing ingredient to the shopping list
+        shopping_list.append(ingredient)
+
+print(shopping_list)
+# Output: [Only the ingredients that are actually missing]
+
+
+
+```
+
+```
