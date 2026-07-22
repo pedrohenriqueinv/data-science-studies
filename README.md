@@ -16,19 +16,19 @@ Below is the list of topics documented in this repository:
 *   **Providers & Equivalencies:** Core services and case studies from AWS, Azure, and Google Cloud.
 *   **Data Regulations:** GDPR, PII, and geographical compliance.
 
-### 🐍 Python for Data Science *(Coming Soon)*
-*   Basic syntax, data structures, and analysis libraries (Pandas, NumPy).
+### 🐍 [Python for Developers](./Introducion%20To%20Python%20For%20Developers/understanding-python.md)
+*   **Basics & Data Types:** Variables, Strings, Integers, Floats, and Booleans (`type()`).
+*   **Data Structures:** Lists, Dictionaries (Key-Value), Sets (Unique items), and Tuples (Immutable).
+*   **Manipulation & Methods:** Slicing, indexing (positive/negative), string methods (`.lower()`, `.upper()`, `.replace()`), and collection methods (`.keys()`, `.values()`, `.items()`, `.append()`).
 
 ---
 
 ## 🛠️ How to Use This Repository
 
 If you want to use my notes to study:
-1. Navigate to the specific directory of interest (e.g., `/cloud-computing`).
+1. Navigate to the specific directory of interest (e.g., `/cloud-computing` or `/Introducion To Python For Developers`).
 2. Read the `.md` (Markdown) files containing organized summaries.
 3. (Optional) Import any `.txt` or `.apkg` files inside the `anki-flashcards` directory into your **Anki** to practice active recall.
 
 ## 📄 License
-<<<<<<< HEAD
 This repository is licensed under the MIT License. Feel free to use the notes for your own learning!
-=======
