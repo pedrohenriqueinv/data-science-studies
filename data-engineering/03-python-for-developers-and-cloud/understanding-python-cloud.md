@@ -56,3 +56,26 @@ def process_batch(records: List[Dict[str, any]], threshold: float = 100.0) -> Li
             continue
     return cleaned
 ```
+
+## 3. Cloud Provider Architecture (AWS vs Azure vs GCP)
+
+In enterprise data engineering, Python code runs on cloud infrastructure. Below is the multi-cloud service equivalence matrix:
+
+```
+                    ┌──────────────────────────────────────────────┐
+                    │       Enterprise Cloud Data Platform         │
+                    └──────────────────────┬───────────────────────┘
+                                           │
+         ┌─────────────────────────────────┼─────────────────────────────────┐
+         ▼                                 ▼                                 ▼
+   [ Amazon AWS ]                   [ Microsoft Azure ]               [ Google Cloud ]
+   • S3 (Object Store)              • ADLS Gen2 (Blob Store)          • Cloud Storage (GCS)
+   • EMR / Glue (Spark/ETL)         • Synapse / Databricks            • Dataproc / Dataflow
+   • Redshift (Cloud DWH)           • Synapse SQL Dedicated           • BigQuery (Serverless DWH)
+   • Lambda (Serverless Python)     • Azure Functions                 • Cloud Functions
+```
+
+### Cloud Cost Models:
+* **IaaS (Infrastructure as a Service):** Pay for EC2 / Compute Engine VM uptime by the second.
+* **PaaS (Platform as a Service):** Pay for managed database engines (AWS RDS, Cloud SQL).
+* **Serverless / FaaS:** Pay strictly per execution millisecond and allocated RAM (AWS Lambda, BigQuery query scan volume).
