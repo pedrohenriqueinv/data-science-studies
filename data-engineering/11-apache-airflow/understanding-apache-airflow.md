@@ -1,0 +1,76 @@
+# 🌪️ Introduction to Apache Airflow: Orchestration, DAGs & TaskFlow API
+
+> **Track:** Data Engineering in Python  
+> **Module:** 11 - Introduction to Apache Airflow in Python  
+> **Focus:** Airflow 5 Core Components, TaskFlow API (`@task`), XComs, Sensors, SLAs & Branching
+
+---
+
+## 1. The 5 Core Architectural Components
+
+Apache Airflow is a platform to programmatically author, schedule, and monitor workflows as Directed Acyclic Graphs (DAGs):
+
+```
+                   ┌──────────────────────────────────────┐
+                   │         Webserver (UI Portal)        │
+                   └──────────────────┬───────────────────┘
+                                      │
+                   ┌──────────────────▼───────────────────┐
+                   │               Scheduler              │
+                   │    (Monitors DAGs & Triggers Tasks)  │
+                   └──────┬────────────────────────┬──────┘
+                          │                        │
+        ┌─────────────────▼────────┐     ┌─────────▼────────────────┐
+        │   Metadata Database      │     │         Executor         │
+        │ (PostgreSQL/MySQL state) │     │ (Sequential/Celery/K8s)  │
+        └──────────────────────────┘     └─────────┬────────────────┘
+                                                   │
+                                         ┌─────────▼────────┐
+                                         │  Worker Nodes    │
+                                         │ (Execute Tasks)  │
+                                         └──────────────────┘
+```
+
+1. **Webserver:** Renders the web interface for monitoring and DAG inspection.
+2. **Scheduler:** Orchestrates execution, checks schedules, and delegates tasks to executor.
+3. **Metadata Database:** Stores task states, variables, connections, and execution history.
+4. **Executor:** Mechanism determining *how* tasks run (Local, Celery, Kubernetes).
+5. **Workers:** Processes/containers that physically execute task code.
+
+---
+
+## 2. Modern TaskFlow API (`@task`) vs Classical Operators
+
+Modern Airflow replaces verbose `PythonOperator` declarations with the clean `@task` decorator:
+
+```python
+from airflow.decorators import dag, task
+from datetime import datetime, timedelta
+
+@dag(
+    schedule="@daily",
+    start_date=datetime(2026, 1, 1),
+    catchup=False,
+    default_args={"retries": 2, "retry_delay": timedelta(minutes=5)}
+)
+def telemetry_orchestrator():
+    
+    @task
+    def extract_metrics() -> list:
+        return [120, 240, 310]
+
+    @task
+    def aggregate_metrics(metrics: list) -> float:
+        return sum(metrics) / len(metrics)
+
+    @task
+    def publish_report(avg_val: float):
+        print(f"Published average: {avg_val:.2f}")
+
+    # Implicit XCom passing and dependency definition:
+    raw_data = extract_metrics()
+    avg = aggregate_metrics(raw_data)
+    publish_report(avg)
+
+pipeline = telemetry_orchestrator()
+```
