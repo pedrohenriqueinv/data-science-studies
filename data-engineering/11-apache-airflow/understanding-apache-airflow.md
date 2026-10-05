@@ -74,3 +74,22 @@ def telemetry_orchestrator():
 
 pipeline = telemetry_orchestrator()
 ```
+
+## 3. Sensors: Poke vs Reschedule Modes
+
+Sensors wait asynchronously for external events (e.g. file arrival in S3 or database record creation):
+
+* **`mode='poke'` (Default):** Worker slot remains locked and blocked throughout the wait cycle. **Wastes worker slots!**
+* **`mode='reschedule'`:** Releases worker back to pool between check intervals, re-enqueueing only when interval expires. **Mandatory for production!**
+
+```python
+from airflow.sensors.filesystem import FileSensor
+
+wait_for_raw_file = FileSensor(
+    task_id="wait_for_file",
+    filepath="/landing_zone/daily_feed.csv",
+    poke_interval=60,       # Check every 60 seconds
+    timeout=3600,           # Fail if file does not arrive within 1 hour
+    mode="reschedule"       # Free worker slot between checks
+)
+```
