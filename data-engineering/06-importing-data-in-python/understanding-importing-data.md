@@ -54,3 +54,13 @@ query = """
 
 df_vip = pd.read_sql(query, con=engine, params={"start_date": "2026-01-01"})
 ```
+
+## 4. Practical Exercises & Capstone Solutions
+
+### Exercise 1: Skipping Corrupted Header Rows
+* **Problem:** A legacy CSV exports 5 lines of metadata before the column headers. How do you import only valid data?
+* **Solution:** `pd.read_csv('export.csv', skiprows=5)` (or `header=5`).
+
+### Exercise 2: Ingesting SAS Clinical Data
+* **Problem:** A pharmaceutical research partner delivers a `.sas7bdat` dataset. How do you inspect its column names without loading 40GB into memory?
+* **Solution:** Use `pd.read_sas('trial.sas7bdat', chunksize=1000)` and inspect `next(reader).columns`.
