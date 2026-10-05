@@ -99,3 +99,13 @@ wait_for_raw_file = FileSensor(
 Airflow execution operates on **Data Intervals**:
 * A DAG scheduled for `@daily` with `start_date=2026-10-01` runs at the **end** of the interval (`2026-10-02 00:00:00`), after all data for that day has been collected.
 * **`catchup=False`:** Crucial setting preventing Airflow from executing hundreds of historical backfill runs upon activation.
+
+## 5. Practical Exercises & Capstone Solutions
+
+### Exercise 1: Diagnosing 'DAG Import Error'
+* **Problem:** A red banner in the Airflow UI displays "DAG Import Error".
+* **Solution:** Run `airflow dags list-import-errors` in CLI, or run `python dag_file.py` to identify missing package dependencies or global syntax errors.
+
+### Exercise 2: XCom Size Limits
+* **Problem:** Passing a 500MB Pandas DataFrame directly between `@task` functions crashes Airflow.
+* **Solution:** XComs store data in the Airflow metadata database (PostgreSQL bytea/text), which is limited and not designed for Big Data. Pass **file paths or S3 URIs** via XCom instead, keeping data in object storage.
