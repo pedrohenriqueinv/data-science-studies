@@ -50,3 +50,13 @@ Retry 2: Wait 2s
 Retry 3: Wait 4s
 Retry 4: Wait 8s
 ```
+
+## 4. Practical Exercises & Capstone Solutions
+
+### Exercise 1: Avoiding Rate-Limit Penalties
+* **Problem:** An API provider allows 100 requests every 60 seconds. A sequential script loops 500 times. How do you rate-limit without getting banned?
+* **Solution:** Use a token bucket algorithm or inject deterministic sleeps: `time.sleep(60.0 / 100.0)`.
+
+### Exercise 2: Session Reuse for TCP Handshake Optimization
+* **Problem:** Ingesting 10,000 JSON snippets sequentially creates high latency.
+* **Solution:** Use `requests.Session()`! A session maintains an underlying connection pool and reuses the TCP connection (HTTP Keep-Alive), cutting handshake latency by up to 70%.
