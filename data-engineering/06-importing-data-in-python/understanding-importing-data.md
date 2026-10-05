@@ -31,3 +31,26 @@ with open("telemetry_huge.log", mode="r", encoding="utf-8") as file:
 | **Stata** | `.dta` | `pd.read_stata()` | Econometrics, academic statistical studies |
 | **HDF5** | `.h5` / `.hdf5` | `h5py.File()` | High-volume IoT sensor streams, genomics (>100GB) |
 | **MATLAB** | `.mat` | `scipy.io.loadmat()` | Engineering simulations, signal processing |
+
+## 3. Relational Database Ingestion via SQLAlchemy
+
+Direct DB ingestion bypasses intermediate flat files. Using SQLAlchemy engines establishes robust database connectivity:
+
+```python
+from sqlalchemy import create_engine
+import pandas as pd
+
+# Creating connection engine
+engine = create_engine("sqlite:///enterprise_dw.db")
+
+# Executing parameterized SQL queries into DataFrame
+query = """
+    SELECT customer_id, SUM(order_total) AS total_revenue
+    FROM orders
+    WHERE order_date >= :start_date
+    GROUP BY customer_id
+    HAVING SUM(order_total) > 1000
+"""
+
+df_vip = pd.read_sql(query, con=engine, params={"start_date": "2026-01-01"})
+```
