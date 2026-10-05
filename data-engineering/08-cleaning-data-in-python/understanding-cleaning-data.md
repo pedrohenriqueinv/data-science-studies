@@ -48,3 +48,10 @@ Dataset A: "Apple Inc."   ───┐
                              ├──► Levenshtein Ratio: 92% ──► Classified as MATCH
 Dataset B: "Apple Corp."  ───┘
 ```
+
+## 4. Practical Exercises & Capstone Solutions
+
+### Exercise 1: Handling Missingness Mechanisms (MCAR vs MAR vs MNAR)
+* **Missing Completely at Random (MCAR):** System glitched randomly dropping packets. Safe to drop or impute with mean.
+* **Missing at Random (MAR):** Missingness depends on observed data (e.g., younger users skip providing landline phones).
+* **Missing Not at Random (MNAR):** Missingness depends on the unobserved value itself (e.g., high earners refusing to state salary). Imputation requires domain modeling.
