@@ -43,3 +43,36 @@ Git creates a new **Merge Commit** with two parent hashes.
      /          ▼
 C1 ───► C2 ───────► C5 [Merge Commit] (main)
 ```
+
+## 3. Merge Conflict Resolution Mechanics
+
+A merge conflict occurs when two branches modify the **exact same line** of code in different ways, or one branch deletes a file that another modified.
+
+### Conflict Markers Anatomy
+
+When Git halts execution due to a conflict, it decorates the file with markers:
+
+```python
+<<<<<<< HEAD (Ours - current branch)
+DATABASE_URI = "postgresql://prod_user:secret@prod-db.internal:5432/analytics"
+=======
+DATABASE_URI = "postgresql://etl_user:strong_password@analytics-db.cloud:5432/dw"
+>>>>>>> feature/cloud-db (Theirs - incoming branch)
+```
+
+### Resolution Protocol:
+1. Identify conflicting files via `git status`.
+2. Open files and manually edit to reconcile logic.
+3. Remove all marker lines (`<<<<<<<`, `=======`, `>>>>>>>`).
+4. Stage resolved files: `git add <file>`.
+5. Finalize merge: `git commit -m "merge: resolve database URI configuration conflict"`.
+
+---
+
+## 4. Remote Operations: Fetch vs Pull vs Push
+
+| Command | Action | Impact on Working Directory |
+| :--- | :--- | :--- |
+| `git fetch <remote>` | Downloads commits, tags, and refs from remote to `origin/<branch>` | **Zero impact** on local files. Safe inspection. |
+| `git pull <remote> <branch>` | Performs `git fetch` followed immediately by `git merge` | Updates working directory; may trigger conflicts. |
+| `git push -u <remote> <branch>` | Uploads local commits and binds upstream tracking branch | Updates remote repository refs. |
