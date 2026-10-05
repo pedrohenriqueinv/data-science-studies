@@ -49,3 +49,13 @@ def transform_sensor_stream(raw_data):
     filtered = [x * 1.8 + 32 for x in raw_data if x is not None]
     return filtered
 ```
+
+## 4. Practical Exercises & Capstone Solutions
+
+### Exercise 1: Eliminating .iterrows() in Production
+* **Problem:** A pipeline takes 45 minutes to normalize a 500,000-row DataFrame using `df.iterrows()`. How do you refactor it?
+* **Solution:** Replace the loop with vectorized Pandas operations (e.g. `df['col'] = np.where(df['col'] > 0, df['col'] * 2, 0)`). This eliminates Python interpreter loop overhead and drops execution time to under 0.1 seconds.
+
+### Exercise 2: Set Membership vs List in Data Filtering
+* **Problem:** Filtering 10,000,000 transactions where `user_id in active_users`. `active_users` has 500,000 IDs.
+* **Solution:** Convert `active_users` from a list to a `set` or `frozenset`. Searching in a list takes $O(n 	imes m)$ operations ($5 	imes 10^{12}$ comparisons), which would freeze the machine; with a set, membership is $O(1)$, taking only $O(n)$ ($10^7$ operations).
