@@ -40,3 +40,19 @@ By default, Pandas infers data types as 64-bit (`int64`, `float64`, or `object` 
 | `float64` (8 bytes) | `float32` (4 bytes) | **50.0%** | Standard 7-digit decimal precision |
 | `object` (pointer array) | `category` | **Up to 90%** | Columns with low cardinality (< 5% unique values) |
 | `object` (string) | `string[pyarrow]` | **60-80%** | Zero-copy Arrow memory buffers |
+
+## 3. Streaming Relational Databases with SQLAlchemy Engines
+
+Querying millions of rows without loading all rows into RAM:
+
+```python
+from sqlalchemy import create_engine
+import pandas as pd
+
+engine = create_engine("postgresql+psycopg2://user:pass@host:5432/db")
+
+# Stream query in batches of 10,000 rows
+with engine.connect().execution_options(stream_results=True) as conn:
+    for chunk_df in pd.read_sql("SELECT * FROM fact_orders", con=conn, chunksize=10000):
+        process_batch(chunk_df)
+```
