@@ -52,3 +52,15 @@ class S3Extractor(BaseExtractor):
         # Implementation for downloading and reading S3 object
         return pd.read_parquet(f"s3://{self.bucket}/{self.key}")
 ```
+
+## 3. PEP 8 Standards & Docstrings (PEP 257)
+
+Professional code must be self-documenting and lint-clean:
+
+* **Naming Conventions:**
+  * Modules & Packages: `lowercase_with_underscores`
+  * Classes: `CapWords` (PascalCase)
+  * Functions & Methods: `lowercase_with_underscores`
+  * Constants: `UPPER_CASE_WITH_UNDERSCORES`
+  * Private/Protected members: `_leading_underscore`
+* **Docstring Styles:** Google style or NumPy style, documenting `Args`, `Returns`, and `Raises`.
