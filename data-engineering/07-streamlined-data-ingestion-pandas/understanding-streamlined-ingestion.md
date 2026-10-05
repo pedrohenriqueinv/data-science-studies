@@ -56,3 +56,13 @@ with engine.connect().execution_options(stream_results=True) as conn:
     for chunk_df in pd.read_sql("SELECT * FROM fact_orders", con=conn, chunksize=10000):
         process_batch(chunk_df)
 ```
+
+## 4. Practical Exercises & Capstone Solutions
+
+### Exercise 1: Ingesting Multi-Tab Excel Files
+* **Problem:** An Excel workbook has 12 monthly sheets (`Jan` to `Dec`). How do you import all sheets into a single consolidated DataFrame?
+* **Solution:** Pass `sheet_name=None` to `pd.read_excel('budget.xlsx', sheet_name=None)`. This returns a dictionary of DataFrames, which can be combined via `pd.concat(all_sheets.values(), ignore_index=True)`.
+
+### Exercise 2: Flattening Nested JSON Responses
+* **Problem:** An API returns records with nested geography `{ "id": 1, "location": {"city": "Berlin", "lat": 52.52} }`.
+* **Solution:** Use `pd.json_normalize(response_json, record_path=None)` to flatten nested objects into top-level columns (`location.city`, `location.lat`).
