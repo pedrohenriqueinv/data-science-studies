@@ -36,3 +36,17 @@ response = requests.get("https://api.enterprise.com/v1/telemetry", headers=heade
 response.raise_for_status()
 data = response.json()
 ```
+
+## 3. Resilience: Rate Limits & Exponential Backoff
+
+APIs enforce rate limits (e.g., 60 requests/minute). When exceeded, the server returns HTTP `429 Too Many Requests` with a `Retry-After` header.
+
+### Exponential Backoff Algorithm:
+If a transient failure occurs, wait $2^n 	imes 	ext{delay} + 	ext{jitter}$ before retrying to prevent flooding the server (thundering herd problem).
+
+```
+Retry 1: Wait 1s
+Retry 2: Wait 2s
+Retry 3: Wait 4s
+Retry 4: Wait 8s
+```
