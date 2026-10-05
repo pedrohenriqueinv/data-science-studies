@@ -79,3 +79,13 @@ In enterprise data engineering, Python code runs on cloud infrastructure. Below 
 * **IaaS (Infrastructure as a Service):** Pay for EC2 / Compute Engine VM uptime by the second.
 * **PaaS (Platform as a Service):** Pay for managed database engines (AWS RDS, Cloud SQL).
 * **Serverless / FaaS:** Pay strictly per execution millisecond and allocated RAM (AWS Lambda, BigQuery query scan volume).
+
+## 4. Practical Exercises & Capstone Solutions
+
+### Exercise 1: Dictionary Lookup vs Linear Search
+* **Problem:** You have a 1,000,000-row customer list and need to look up country codes. Why should you avoid `[row['country'] for row in customers if row['id'] == target_id]`?
+* **Solution:** Linear scan across a list is $O(n)$. Converting the list once into a lookup dictionary `{row['id']: row['country'] for row in customers}` reduces subsequent lookups to $O(1)$ constant time.
+
+### Exercise 2: Handling Cloud API Timeouts
+* **Problem:** When sending payloads to a cloud API (e.g. AWS Lambda or GCP Cloud Function), what Python pattern prevents infinite hanging?
+* **Solution:** Explicit socket timeout parameters: `requests.post(url, json=data, timeout=(3.05, 27))` where the tuple defines `(connect_timeout, read_timeout)`.
