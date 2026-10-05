@@ -1,14 +1,21 @@
-﻿# 🧠 Data Science & Cloud Engineering Study Repository
+# 🧠 Data Science & Cloud Engineering Study Repository
 
-Welcome! This repository is dedicated exclusively to storing my academic notes, theoretical summaries, and study guides in Data Science, Data Engineering, Database Systems, and Cloud Computing. 
+Welcome! This repository is dedicated exclusively to storing my academic notes, theoretical summaries, and study guides in **Data Science, Data Engineering, Database Systems, and Cloud Computing**. 
 
-> 📌 **Note:** This is a theoretical and conceptual study log. For hands-on projects, deployments, and code portfolios, please visit my personal portfolio repository.
+> 📌 **Note:** This is a comprehensive, production-grade study log and reference library. For hands-on deployments and live portfolio codebases, please visit my personal projects portfolio.
 
 ---
 
 ## 🗺️ Roadmap & Study Topics
 
 Below is the list of topics documented in this repository:
+
+### ⚙️ [Data Engineering in Python (Career Track)](./data-engineering/README.md)
+*   **Version Control & Tooling:** [01. Introduction to Git](./data-engineering/01-introduction-to-git/understanding-git-basics.md) and [02. Intermediate Git](./data-engineering/02-intermediate-git/understanding-intermediate-git.md) (Object models, 3-way merges, conflict resolution, audit tracking).
+*   **Language Foundations & Cloud:** [03. Python for Developers & Cloud](./data-engineering/03-python-for-developers-and-cloud/understanding-python-cloud.md) (Time complexities, idiomatic patterns, AWS, Azure, GCP service mapping).
+*   **Performance & Architecture:** [04. Writing Efficient Code](./data-engineering/04-writing-efficient-code/understanding-writing-efficient-code.md) (CPython bytecode, line/memory profiling, vectorized NumPy/Pandas) and [05. Software Engineering Principles](./data-engineering/05-software-engineering-principles/understanding-software-engineering-principles.md) (Modularity, OOP, packaging, pytest test suites).
+*   **Ingestion & Data Quality:** [06. Importing Data](./data-engineering/06-importing-data-in-python/understanding-importing-data.md) (Context managers, HDF5, SAS, Stata, SQLite), [07. Streamlined Ingestion](./data-engineering/07-streamlined-data-ingestion-pandas/understanding-streamlined-ingestion.md) (Out-of-core chunking, strict dtypes, multi-tab Excel), [08. Cleaning Data](./data-engineering/08-cleaning-data-in-python/understanding-cleaning-data.md) (Constraints, regex, record linkage deduplication), and [09. APIs in Python](./data-engineering/09-introduction-to-apis-in-python/understanding-apis-in-python.md) (HTTP protocol, pagination, rate limits, exponential backoff).
+*   **Production Pipelines & Orchestration:** [10. ETL & ELT Pipelines](./data-engineering/10-etl-and-elt-pipelines/understanding-etl-elt.md) (Parquet columnar storage, idempotent upserts, transactional safety) and [11. Apache Airflow](./data-engineering/11-apache-airflow/understanding-apache-airflow.md) (Architecture, TaskFlow API `@task`, FileSensors in reschedule mode, DAG scheduling).
 
 ### ☁️ [Cloud Computing](./cloud-computing/understanding-cloud.md)
 *   **Concepts:** Virtualization, Scalability (Horizontal vs. Vertical), and Billing Models (Pay-as-you-go).
@@ -22,22 +29,27 @@ Below is the list of topics documented in this repository:
 *   **SQL Subgroups & Syntax:** DDL, DML, DQL, DCL, and TCL; key operational traps (`DROP` vs. `TRUNCATE` vs. `DELETE`).
 *   **Relational Modeling & Case Study:** University Library database (*Biblioteca Universitária*) with Primary Keys, Foreign Keys, referential actions (`RESTRICT`, `CASCADE`, `SET NULL`), and multi-statement ACID transactions (`SAVEPOINT`, `RETURNING`).
 *   **Database Landscape:** Architectural comparison between PostgreSQL, MySQL, Oracle Database, Microsoft SQL Server, SQLite, and MariaDB.
-*   **Review & Exam Prep:** Pocket cheat sheets, top 6 exam pitfalls, and a 15-question commented assessment test.
 
 ### 🐍 [Python for Developers](./Introducion%20To%20Python%20For%20Developers/understanding-python.md)
 *   **Basics & Data Types:** Variables, Strings, Integers, Floats, and Booleans (`type()`).
 *   **Data Structures:** Lists, Dictionaries (Key-Value), Sets (Unique items), and Tuples (Immutable).
-*   **Manipulation & Methods:** Slicing, indexing (positive/negative), string methods (`.lower()`, `.upper()`, `.replace()`), and collection methods (`.keys()`, `.values()`, `.items()`, `.append()`).
+*   **Manipulation & Methods:** Slicing, indexing, string methods, and collection methods.
 
 ---
 
-## 🛠️ How to Use This Repository
+## 🛠️ How to Study with This Repository (70 / 20 / 10 Framework)
 
-If you want to use my notes to study:
-1. Navigate to the specific directory of interest (e.g., `/cloud-computing`, `/database-management-systems`, or `/Introducion To Python For Developers`).
-2. Read the `.md` (Markdown) files containing organized summaries.
-3. (Optional) Run the practical SQL scripts under `/scripts` (such as `biblioteca_universitaria.sql` in PostgreSQL / pgAdmin).
-4. (Optional) Import any `.txt` or `.apkg` files inside the `anki-flashcards` directory into your **Anki** to practice active recall.
+1. **70% Hands-On Code Execution:**
+   * Explore the `/scripts` and `/dags` folders inside each module.
+   * Run the unit test suites with `pytest`.
+   * Recreate the Capstone Challenges in blank files before consulting solutions.
+2. **20% Active Recall & Spaced Repetition (Anki):**
+   * Import the flashcard `.txt` files located inside each module's `anki-flashcards/` folder into [Anki](https://apps.ankiweb.net/).
+   * Practice 15 minutes of daily spaced repetition to retain CLI flags, decorators, and internal memory layouts.
+3. **10% Architectural Theory:**
+   * Read the `understanding-*.md` guides for deep conceptual mental models, comparison tables, and exam/interview prep.
+
+---
 
 ## 📄 License
-This repository is licensed under the MIT License. Feel free to use the notes for your own learning!
+This repository is licensed under the MIT License. Feel free to use the notes and code for your own learning!
