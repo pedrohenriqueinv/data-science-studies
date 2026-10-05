@@ -93,3 +93,9 @@ wait_for_raw_file = FileSensor(
     mode="reschedule"       # Free worker slot between checks
 )
 ```
+
+## 4. Scheduling & Cron Mechanics
+
+Airflow execution operates on **Data Intervals**:
+* A DAG scheduled for `@daily` with `start_date=2026-10-01` runs at the **end** of the interval (`2026-10-02 00:00:00`), after all data for that day has been collected.
+* **`catchup=False`:** Crucial setting preventing Airflow from executing hundreds of historical backfill runs upon activation.
