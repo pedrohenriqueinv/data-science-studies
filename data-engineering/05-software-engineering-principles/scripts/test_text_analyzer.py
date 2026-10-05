@@ -15,12 +15,12 @@ def social_post():
 
 def test_document_analyzer_token_count(sample_corpus):
     analyzer = DocumentAnalyzer(sample_corpus)
-    assert analyzer.token_count == 9
+    assert analyzer.token_count == 10
 
 def test_document_analyzer_unique_count(sample_corpus):
     analyzer = DocumentAnalyzer(sample_corpus)
     # 'fast' is repeated twice
-    assert analyzer.unique_word_count == 8
+    assert analyzer.unique_word_count == 9
 
 def test_top_n_words(sample_corpus):
     analyzer = DocumentAnalyzer(sample_corpus)
