@@ -64,3 +64,28 @@ Professional code must be self-documenting and lint-clean:
   * Constants: `UPPER_CASE_WITH_UNDERSCORES`
   * Private/Protected members: `_leading_underscore`
 * **Docstring Styles:** Google style or NumPy style, documenting `Args`, `Returns`, and `Raises`.
+
+## 4. Practical Exercises & Packaging Best Practices
+
+### Modern pyproject.toml Configuration
+```toml
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "enterprise_data_pipeline"
+version = "0.1.0"
+authors = [{ name="Data Engineer", email="engineer@datacamp.internal" }]
+description = "Scalable telemetry ingestion and transformation library"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.0.0",
+    "pyarrow>=14.0.0",
+    "sqlalchemy>=2.0.0"
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4.0", "ruff>=0.1.0"]
+```
