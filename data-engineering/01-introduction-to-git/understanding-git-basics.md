@@ -56,3 +56,30 @@ The Git lifecycle operates across three primary local areas:
 
 * **Nested Repositories:** Running `git init` inside a subdirectory of an existing repository creates an untracked git boundary that prevents parent tracking.
 * **Committing Large Binary Datasets:** Committing raw CSVs/Parquet (>100MB) inflates the `.git` packfile permanently. Use `.gitignore` and remote cloud storage (S3/GCS) instead.
+
+## 4. Advanced Inspection: Git Diff & Log Formats
+
+Understanding precisely what changed before staging or committing is critical in production pipelines:
+
+```bash
+# Compare Working Tree changes against Staging Area (unstaged changes)
+git diff
+
+# Compare Staging Area changes against the last commit (staged changes)
+git diff --staged
+
+# Compare two distinct commits across history
+git diff <commit_hash_1> <commit_hash_2>
+
+# Display commit history showing files modified and change statistics
+git log --stat -n 5
+
+# Format log with custom date and author information
+git log --pretty=format:"%h - %an, %ar : %s"
+```
+
+### Git Revert vs Git Reset
+
+* **`git revert <commit>`:** Creates a brand-new commit that applies the exact inverse patch of the target commit. **Safe for public/shared branches.**
+* **`git reset --soft <commit>`:** Moves HEAD to target commit; keeps changes staged.
+* **`git reset --hard <commit>`:** Moves HEAD and destroys all uncommitted changes in both Index and Working Directory. **Destructive!**
