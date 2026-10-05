@@ -30,3 +30,22 @@ NumPy Array / Parquet Buffer:
 ```
 
 In standard Python lists, each integer is an allocated `PyObject` structure (28+ bytes) scattered across RAM, causing severe CPU cache misses. NumPy arrays allocate a contiguous raw C memory block, enabling hardware vectorization (SIMD).
+
+## 3. Profiling Suite: Surgical Line & Memory Analysis
+
+Never guess where bottlenecks exist. Measure execution time and memory allocation using specialized profilers:
+
+### Profiling Tools Hierarchy:
+1. **`%timeit` / `timeit` module:** Statistically rigorous micro-benchmarking with multiple iterations.
+2. **`cProfile`:** Standard library deterministic profiler showing total function calls and execution times.
+3. **`line_profiler` (`@profile`):** Line-by-line CPU execution breakdown.
+4. **`memory_profiler` (`@profile`):** Line-by-line RAM allocation tracking.
+
+```python
+# Decorating a function for line-by-line inspection:
+@profile
+def transform_sensor_stream(raw_data):
+    # Detect high memory spikes or CPU intensive iterations
+    filtered = [x * 1.8 + 32 for x in raw_data if x is not None]
+    return filtered
+```
