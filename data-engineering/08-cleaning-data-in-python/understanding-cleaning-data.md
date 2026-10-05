@@ -33,3 +33,18 @@ assert df["transaction_id"].is_unique, "Duplicate transaction IDs detected in pi
 df["phone"] = df["raw_phone"].str.replace(r"[^0-9]", "", regex=True)
 df["email"] = df["raw_email"].str.strip().str.lower()
 ```
+
+## 3. Record Linkage & Fuzzy Matching
+
+When joining two datasets that lack a common foreign key (e.g., matching company names across CRM and external sales data), exact joins fail.
+
+### The Record Linkage Protocol:
+1. **Blocking:** Partition data into blocks (e.g. matching on city or postal code) to avoid comparing every row with every row ($O(n 	imes m)$).
+2. **Similarity Scoring:** Calculate Levenshtein or Jaro-Winkler distances between candidate fields using `thefuzz` / `recordlinkage`.
+3. **Classification:** Match pairs exceeding a confidence threshold (e.g., score $\ge 85$).
+
+```
+Dataset A: "Apple Inc."   ───┐
+                             ├──► Levenshtein Ratio: 92% ──► Classified as MATCH
+Dataset B: "Apple Corp."  ───┘
+```
