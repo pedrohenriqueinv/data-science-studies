@@ -36,3 +36,12 @@ In production data lakes, CSV is an anti-pattern. **Apache Parquet** provides:
 * **Columnar Layout:** Scans only queried columns, slashing I/O by up to 95%.
 * **Compression:** Snappy/GZIP compression reduces storage costs by 80%.
 * **Embedded Schema:** Stores data types, nullability, and min/max statistics per chunk.
+
+## 3. Idempotency & Transactional Safety
+
+An **Idempotent Pipeline** can be executed multiple times with identical parameters without altering the final state of the database or duplicating records.
+
+### Idempotency Strategies:
+1. **Partition Overwriting:** Overwrite the target partition (`YEAR=2026/MONTH=10`) rather than appending.
+2. **Upsert (MERGE INTO):** Match on primary key; update existing records, insert new ones.
+3. **Staging Table Swap:** Load data into a temporary table, validate integrity, and perform an atomic transaction swap.
