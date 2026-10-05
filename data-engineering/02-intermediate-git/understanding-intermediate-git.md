@@ -76,3 +76,17 @@ DATABASE_URI = "postgresql://etl_user:strong_password@analytics-db.cloud:5432/dw
 | `git fetch <remote>` | Downloads commits, tags, and refs from remote to `origin/<branch>` | **Zero impact** on local files. Safe inspection. |
 | `git pull <remote> <branch>` | Performs `git fetch` followed immediately by `git merge` | Updates working directory; may trigger conflicts. |
 | `git push -u <remote> <branch>` | Uploads local commits and binds upstream tracking branch | Updates remote repository refs. |
+
+## 5. Practical Exercises & Capstone Solutions
+
+### Exercise 1: Finding Common Ancestor
+* **Problem:** How do you find the exact commit hash where `feature/api` diverged from `main`?
+* **Solution:** `git merge-base main feature/api`
+
+### Exercise 2: Aborting a Stuck Merge
+* **Problem:** During a complex merge conflict involving 12 files, you realize the incoming branch was the wrong one. How do you return cleanly to the pre-merge state?
+* **Solution:** `git merge --abort`
+
+### Exercise 3: Inspecting Divergence Count
+* **Problem:** How can you verify how many commits local `main` is ahead and behind `origin/main`?
+* **Solution:** `git rev-list --left-right --count main...origin/main`
